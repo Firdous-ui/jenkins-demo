@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone GitHub Repository') {
+            steps {
+                git 'YOUR_GITHUB_REPOSITORY_URL'
+            }
+        }
+
+        stage('Test HTML File') {
+            steps {
+                script {
+                    if (fileExists('index.html')) {
+                        echo 'SUCCESS: index.html found!'
+                    } else {
+                        error 'ERROR: index.html not found!'
+                    }
+                }
+            }
+        }
+
+        stage('Build/Test Complete') {
+            steps {
+                echo 'Jenkins + GitHub practical completed successfully!'
+            }
+        }
+    }
+}
